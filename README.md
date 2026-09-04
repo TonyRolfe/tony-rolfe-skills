@@ -19,7 +19,7 @@ Inspired by [Matt Pocock's skills collection](https://github.com/mattpocock/matt
 ### macOS / Linux — global install (available in all workspaces)
 
 ```bash
-git clone https://github.ibm.com/tony-rolfe/tony-rolfe-skills.git ~/.bob/skills-src/tony-rolfe-skills
+git clone https://github.com/TonyRolfe/tony-rolfe-skills.git ~/.bob/skills-src/tony-rolfe-skills
 ln -s ~/.bob/skills-src/tony-rolfe-skills/sync-repos ~/.bob/skills/sync-repos
 ```
 
@@ -27,14 +27,14 @@ ln -s ~/.bob/skills-src/tony-rolfe-skills/sync-repos ~/.bob/skills/sync-repos
 
 ```bash
 # From your workspace root
-git clone https://github.ibm.com/tony-rolfe/tony-rolfe-skills.git .bob/skills-src/tony-rolfe-skills
+git clone https://github.com/TonyRolfe/tony-rolfe-skills.git .bob/skills-src/tony-rolfe-skills
 ln -s .bob/skills-src/tony-rolfe-skills/sync-repos .bob/skills/sync-repos
 ```
 
 ### Windows (PowerShell) — global install
 
 ```powershell
-git clone https://github.ibm.com/tony-rolfe/tony-rolfe-skills.git "$env:USERPROFILE\.bob\skills-src\tony-rolfe-skills"
+git clone https://github.com/TonyRolfe/tony-rolfe-skills.git "$env:USERPROFILE\.bob\skills-src\tony-rolfe-skills"
 New-Item -ItemType Junction -Path "$env:USERPROFILE\.bob\skills\sync-repos" `
   -Target "$env:USERPROFILE\.bob\skills-src\tony-rolfe-skills\sync-repos"
 ```
@@ -45,7 +45,7 @@ New-Item -ItemType Junction -Path "$env:USERPROFILE\.bob\skills\sync-repos" `
 
 ```powershell
 # From your workspace root
-git clone https://github.ibm.com/tony-rolfe/tony-rolfe-skills.git .bob\skills-src\tony-rolfe-skills
+git clone https://github.com/TonyRolfe/tony-rolfe-skills.git .bob\skills-src\tony-rolfe-skills
 New-Item -ItemType Junction -Path .bob\skills\sync-repos `
   -Target .bob\skills-src\tony-rolfe-skills\sync-repos
 ```
