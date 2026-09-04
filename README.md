@@ -1,6 +1,6 @@
 # tony-rolfe-skills
 
-A collection of AI agent skills for [Bob](https://github.ibm.com/ibm-bob/bob) — IBM's AI coding assistant.
+A collection of AI agent skills for AI coding assistants.
 
 Inspired by [Matt Pocock's skills collection](https://github.com/mattpocock/matt-pocock-skills).
 
