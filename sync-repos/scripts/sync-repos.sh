@@ -66,12 +66,12 @@ sync_repo() {
   target_branch="$(get_nonprod_branch "$repo_dir")"
 
   if [[ -z "$target_branch" ]]; then
-    RESULTS+=("❓ UNKNOWN   | $repo_name | Could not determine non-prod branch — needs manual discovery")
+    RESULTS+=("[UNKNOWN] $repo_name | Could not determine non-prod branch -- needs manual discovery")
     return
   fi
 
   if [[ "$DRY_RUN" == "true" ]]; then
-    RESULTS+=("🔍 DRY RUN   | $repo_name | would sync to '$target_branch'")
+    RESULTS+=("[DRY RUN] $repo_name | would sync to '$target_branch'")
     return
   fi
 
@@ -88,15 +88,15 @@ sync_repo() {
   if git -C "$repo_dir" checkout "$target_branch" --quiet 2>/dev/null; then
     if git -C "$repo_dir" pull --ff-only --quiet 2>/dev/null; then
       if [[ "$stashed" == "true" ]]; then
-        RESULTS+=("⚠️  STASHED   | $repo_name | synced to '$target_branch' — run 'git stash pop' to restore changes")
+        RESULTS+=("[STASHED] $repo_name | synced to '$target_branch' -- run 'git stash pop' to restore changes")
       else
-        RESULTS+=("✅ UPDATED   | $repo_name | '$target_branch' is up to date")
+        RESULTS+=("[OK]      $repo_name | '$target_branch' is up to date")
       fi
     else
-      RESULTS+=("❌ ERROR     | $repo_name | pull --ff-only failed on '$target_branch' (diverged or conflict)")
+      RESULTS+=("[ERROR]   $repo_name | pull --ff-only failed on '$target_branch' (diverged or conflict)")
     fi
   else
-    RESULTS+=("❌ ERROR     | $repo_name | could not checkout '$target_branch'")
+    RESULTS+=("[ERROR]   $repo_name | could not checkout '$target_branch'")
   fi
 }
 
@@ -112,9 +112,7 @@ done
 
 # Print results table
 echo ""
-echo "┌─────────────────────────────────────────────────────────────────────┐"
-echo "│  sync-repos result                                                   │"
-echo "└─────────────────────────────────────────────────────────────────────┘"
+echo "--- sync-repos result ---"
 for line in "${RESULTS[@]}"; do
   echo "  $line"
 done

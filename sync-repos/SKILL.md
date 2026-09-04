@@ -5,7 +5,7 @@ description: Syncs all git repositories in a multi-repo workspace to their non-p
 
 # Sync Repos
 
-Keeps every repository in a multi-repo workspace up to date on its non-prod branch.
+Keeps every repository in a multi-repo workspace up to date on its non-prod branch. Works on macOS, Linux, and Windows.
 
 ## Step 1 — Discover branching strategy
 
@@ -41,31 +41,40 @@ After discovery, store what you learned so future runs skip this step:
 
 ---
 
-## Step 2 — Sync each repo
+## Step 2 — Detect OS and run the right script
 
-Run the bundled script from the workspace root:
+Before running, detect the operating system and invoke the appropriate script:
 
+**macOS / Linux:**
 ```bash
 bash ~/.bob/skills/sync-repos/scripts/sync-repos.sh
 ```
+
+**Windows (PowerShell):**
+```powershell
+pwsh ~/.bob/skills/sync-repos/scripts/sync-repos.ps1
+```
+
+> On Windows, if `pwsh` (PowerShell 7+) is not available, fall back to `powershell`. Both scripts require `git` to be on the system PATH.
 
 The script (per repo):
 1. Stashes any uncommitted changes with a timestamped message
 2. Checks out the discovered non-prod branch
 3. Runs `git pull --ff-only`
-4. Reports result: ✅ updated / ⚠️ stashed / ❌ error
+4. Reports result: `[OK]` / `[STASHED]` / `[ERROR]` / `[UNKNOWN]`
 
 ---
 
 ## Step 3 — Report
 
-Present a table:
+Parse the script output and present a clean table:
 
 | Repo | Branch | Status | Notes |
 |------|--------|--------|-------|
 | ... | develop | ✅ updated | |
-| ... | staging | ⚠️ stashed | 2 changes stashed — run `git stash pop` to restore |
-| ... | develop | ❌ error | merge conflict on `src/foo.ts` |
+| ... | staging | ⚠️ stashed | run `git stash pop` to restore |
+| ... | develop | ❌ error | pull failed — diverged or conflict |
+| ... | — | ❓ unknown | branch not found — see Step 1 |
 
 Remind the user to `git stash pop` in any repo where changes were stashed.
 
@@ -73,6 +82,7 @@ Remind the user to `git stash pop` in any repo where changes were stashed.
 
 ## Options
 
+**macOS / Linux:**
 ```bash
 # Dry run — report what would happen without making changes
 bash ~/.bob/skills/sync-repos/scripts/sync-repos.sh --dry-run
@@ -81,11 +91,18 @@ bash ~/.bob/skills/sync-repos/scripts/sync-repos.sh --dry-run
 bash ~/.bob/skills/sync-repos/scripts/sync-repos.sh --repo <repo-name>
 ```
 
+**Windows:**
+```powershell
+.\sync-repos.ps1 -DryRun
+.\sync-repos.ps1 -Repo <repo-name>
+```
+
 ---
 
 ## Notes
 
 - `main` / `master` are **never** selected as the non-prod target — they are production
-- Repos in detached HEAD state are skipped and flagged ❌
+- Repos in detached HEAD state are skipped and flagged `[ERROR]`
 - Stashed changes are never auto-popped; the user must review and pop manually
 - The script is idempotent — safe to run at the start and end of every session
+- Both scripts require only `git` on the PATH — no other dependencies

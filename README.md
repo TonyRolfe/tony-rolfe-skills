@@ -16,23 +16,47 @@ Inspired by [Matt Pocock's skills collection](https://github.com/mattpocock/matt
 
 ## Installation
 
-### Install a skill globally (available in all workspaces)
+### macOS / Linux — global install (available in all workspaces)
 
 ```bash
-# Clone this collection
 git clone https://github.ibm.com/tony-rolfe/tony-rolfe-skills.git ~/.bob/skills-src/tony-rolfe-skills
-
-# Symlink the skill you want into ~/.bob/skills/
 ln -s ~/.bob/skills-src/tony-rolfe-skills/sync-repos ~/.bob/skills/sync-repos
 ```
 
-### Install a skill into a specific workspace
+### macOS / Linux — workspace-scoped install
 
 ```bash
 # From your workspace root
 git clone https://github.ibm.com/tony-rolfe/tony-rolfe-skills.git .bob/skills-src/tony-rolfe-skills
 ln -s .bob/skills-src/tony-rolfe-skills/sync-repos .bob/skills/sync-repos
 ```
+
+### Windows (PowerShell) — global install
+
+```powershell
+git clone https://github.ibm.com/tony-rolfe/tony-rolfe-skills.git "$env:USERPROFILE\.bob\skills-src\tony-rolfe-skills"
+New-Item -ItemType Junction -Path "$env:USERPROFILE\.bob\skills\sync-repos" `
+  -Target "$env:USERPROFILE\.bob\skills-src\tony-rolfe-skills\sync-repos"
+```
+
+> Windows does not support symlinks without admin rights. Directory junctions (`New-Item -ItemType Junction`) work without elevation and are functionally equivalent for this use case.
+
+### Windows (PowerShell) — workspace-scoped install
+
+```powershell
+# From your workspace root
+git clone https://github.ibm.com/tony-rolfe/tony-rolfe-skills.git .bob\skills-src\tony-rolfe-skills
+New-Item -ItemType Junction -Path .bob\skills\sync-repos `
+  -Target .bob\skills-src\tony-rolfe-skills\sync-repos
+```
+
+### Requirements
+
+| Platform | Requirements |
+|----------|-------------|
+| macOS | `git`, `bash` (pre-installed) |
+| Linux | `git`, `bash` (pre-installed on most distros) |
+| Windows | `git` on PATH, PowerShell 5.1+ or [PowerShell 7+](https://github.com/PowerShell/PowerShell) (`pwsh`) |
 
 ---
 
