@@ -11,6 +11,7 @@ Inspired by [Matt Pocock's skills collection](https://github.com/mattpocock/matt
 | Skill | Description |
 |-------|-------------|
 | [sync-repos](./sync-repos/SKILL.md) | Sync all git repositories in a multi-repo workspace to their non-prod branch. Discovers branching strategy from docs before asking. |
+| [security-audit](./security-audit/SKILL.md) | Run a full security audit across all repos in a multi-repo workspace. Discovers configured security tools, installs missing tooling, creates deduplicated issues per finding, and produces a shareable HTML summary report. |
 
 ---
 
@@ -21,6 +22,7 @@ Inspired by [Matt Pocock's skills collection](https://github.com/mattpocock/matt
 ```bash
 git clone https://github.com/TonyRolfe/tony-rolfe-skills.git ~/.bob/skills-src/tony-rolfe-skills
 ln -s ~/.bob/skills-src/tony-rolfe-skills/sync-repos ~/.bob/skills/sync-repos
+ln -s ~/.bob/skills-src/tony-rolfe-skills/security-audit ~/.bob/skills/security-audit
 ```
 
 ### macOS / Linux — workspace-scoped install
@@ -29,6 +31,7 @@ ln -s ~/.bob/skills-src/tony-rolfe-skills/sync-repos ~/.bob/skills/sync-repos
 # From your workspace root
 git clone https://github.com/TonyRolfe/tony-rolfe-skills.git .bob/skills-src/tony-rolfe-skills
 ln -s .bob/skills-src/tony-rolfe-skills/sync-repos .bob/skills/sync-repos
+ln -s .bob/skills-src/tony-rolfe-skills/security-audit .bob/skills/security-audit
 ```
 
 ### Windows (PowerShell) — global install
@@ -37,6 +40,8 @@ ln -s .bob/skills-src/tony-rolfe-skills/sync-repos .bob/skills/sync-repos
 git clone https://github.com/TonyRolfe/tony-rolfe-skills.git "$env:USERPROFILE\.bob\skills-src\tony-rolfe-skills"
 New-Item -ItemType Junction -Path "$env:USERPROFILE\.bob\skills\sync-repos" `
   -Target "$env:USERPROFILE\.bob\skills-src\tony-rolfe-skills\sync-repos"
+New-Item -ItemType Junction -Path "$env:USERPROFILE\.bob\skills\security-audit" `
+  -Target "$env:USERPROFILE\.bob\skills-src\tony-rolfe-skills\security-audit"
 ```
 
 > Windows does not support symlinks without admin rights. Directory junctions (`New-Item -ItemType Junction`) work without elevation and are functionally equivalent for this use case.
@@ -48,6 +53,8 @@ New-Item -ItemType Junction -Path "$env:USERPROFILE\.bob\skills\sync-repos" `
 git clone https://github.com/TonyRolfe/tony-rolfe-skills.git .bob\skills-src\tony-rolfe-skills
 New-Item -ItemType Junction -Path .bob\skills\sync-repos `
   -Target .bob\skills-src\tony-rolfe-skills\sync-repos
+New-Item -ItemType Junction -Path .bob\skills\security-audit `
+  -Target .bob\skills-src\tony-rolfe-skills\security-audit
 ```
 
 ### Requirements

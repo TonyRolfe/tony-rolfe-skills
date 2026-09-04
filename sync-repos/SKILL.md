@@ -11,8 +11,8 @@ Keeps every repository in a multi-repo workspace up to date on its non-prod bran
 
 Work through these sources **in order**, stopping as soon as you have a definitive answer.
 
-### 1a. Workspace-level AGENT.md
-Read `AGENT.md` in the workspace root. Look for a branching strategy section describing which branch is used for non-prod / development work across all repos.
+### 1a. Workspace-level AGENTS.md
+Read `AGENTS.md` in the workspace root. Look for a branching strategy section describing which branch is used for non-prod / development work across all repos.
 
 ### 1b. Per-repo docs
 For each repo that doesn't yet have a known branch, search these files **in order** (stop at the first hit):
@@ -35,7 +35,7 @@ After discovery, store what you learned so future runs skip this step:
 
 | Scenario | Where to write |
 |----------|---------------|
-| All repos share the same branching strategy | Append a `## Branching Strategy` section to workspace `AGENT.md` |
+| All repos share the same branching strategy | Append a `## Branching Strategy` section to workspace `AGENTS.md` |
 | Repos differ | Append / create `CONTRIB.md` in each affected repo with a `## Branching Strategy` section |
 | User specifies a different location | Follow their instruction |
 
